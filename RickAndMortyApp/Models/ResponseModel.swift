@@ -1,18 +1,18 @@
 //
-//  Respuesta.swift
+//  ResponseModel.swift
 //  RickAndMortyApp
 //
-//  Created by Samuel Cíes Gracia on 14/3/24.
+//  Created by Samuel Cíes Gracia on 15/3/24.
 //
 
 import Foundation
 
-struct RespuestaAPI: Decodable {
+struct RespuestaAPI: Codable {
     let info: Info
     let results: [Character]
 }
 
-struct Info: Decodable {
+struct Info: Codable {
     let count: Int
     let pages: Int
     let next: URL?
