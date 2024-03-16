@@ -1,5 +1,5 @@
 //
-//  Personajes.swift
+//  Respuesta.swift
 //  RickAndMortyApp
 //
 //  Created by Samuel Cíes Gracia on 14/3/24.
@@ -7,7 +7,8 @@
 
 import Foundation
 
-struct Character: Decodable {
+
+struct Character: Codable {
     let id: Int
     let name: String
     let status: String
@@ -16,18 +17,19 @@ struct Character: Decodable {
     let gender: String
     let origin: Origin
     let location: Location
-    let image: URL
+    let image: String
     let episode: [String]
-    let url: URL
+    let url: String
     let created: String
 }
 
-struct Origin: Decodable {
+struct Origin: Codable {
     let name: String
-    let url: URL
+    let url: String
 }
 
-struct Location: Decodable {
+struct Location: Codable {
     let name: String
-    let url: URL
+    let url: String
 }
+
