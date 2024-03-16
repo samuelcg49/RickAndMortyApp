@@ -9,50 +9,51 @@ import SwiftUI
 
 struct DetalleView: View {
     let personaje: Character
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {
-        VStack{
+        
             ZStack(alignment: .top){
-                
-                VStack{
-                    AsyncImage(url: URL(string: personaje.image)){ image in
-                        image.resizable().aspectRatio(contentMode: .fit).edgesIgnoringSafeArea(.top)
-                    } placeholder: {
-                        ProgressView()
-                    }
                     
-                    VStack{
-                        Text(personaje.name).font(.title).fontWeight(.bold)
-                        if personaje.status == "Alive"{
-                            Text(personaje.status).foregroundColor(.green)
-                        }else if personaje.status == "Dead"{
-                            Text(personaje.status).foregroundColor(.red)
-                        }else{
-                            Text(personaje.status).foregroundColor(.gray)
+                    ScrollView{
+                        
+                        AsyncImage(url: URL(string: personaje.image)){ image in
+                            image.resizable().aspectRatio(contentMode: .fit)
+                        } placeholder: {
+                            ProgressView()
                         }
-                        HStack{
-                            VStack(alignment: .leading){
-                                Text("Género: \(personaje.gender)")
-                            }.padding(.bottom)
-                            Spacer()
-                            VStack(alignment: .leading){
-                                Text("Raza: \(personaje.species)")
-                                Text("Status: \(personaje.status)")
+                        
+                        VStack{
+                            Text(personaje.name).font(.title).fontWeight(.bold)
+                            if personaje.status == "Alive"{
+                                Text(personaje.status).foregroundColor(.green)
+                            }else if personaje.status == "Dead"{
+                                Text(personaje.status).foregroundColor(.red)
+                            }else{
+                                Text(personaje.status).foregroundColor(.gray)
                             }
-                            
-                        }.padding(20)
-                     
-                    }.padding()
-                        .padding(.top)
-                        .background(Color.white)
-                        .cornerRadius(30.0)
-                        .offset(y: -30)
-                    
-                }
-                
+                            HStack{
+                                VStack(alignment: .leading){
+                                    Text("Género: \(personaje.gender)")
+                                }.padding(.bottom)
+                                Spacer()
+                                VStack(alignment: .leading){
+                                    Text("Raza: \(personaje.species)")
+                                    Text("Status: \(personaje.status)")
+                                }
+                                
+                            }.padding(20)
+                         
+                        }.padding()
+                            .padding(.top)
+                            .background(Color.white)
+                            .cornerRadius(30.0)
+                            .offset(y: -30)
+                        
+                    }.edgesIgnoringSafeArea(.top)
+                    .navigationBarBackButtonHidden(true)
+                    .navigationBarItems(leading: CustomBackButton(action: {presentationMode.wrappedValue.dismiss()}) )
             }
-        }.edgesIgnoringSafeArea(.top)
-        Spacer()
     }
 }
 
@@ -60,23 +61,17 @@ struct DetalleView: View {
     DetalleView(personaje: PersonajeMock.personaje)
 }
 
-//ZStack(alignment: .top){
+
 //
-//    VStack {
-//        AsyncImage(url: URL(string: personaje.image)){ image in
-//            image.resizable().aspectRatio(contentMode: .fill).frame(height: 300)
-//        } placeholder: {
-//            ProgressView()
-//        }
-//        Spacer()
-//    }
-//
-//    HStack{
-//        Spacer()
-//        ZStack{
-//            Rectangle().frame(width: 40, height: 40).foregroundColor(.white).cornerRadius(10)
-//            Image(systemName: "heart").font(.title2)
-//        }
-//    }.padding(.top, 60).padding(.trailing, 30)
-//
-//}.edgesIgnoringSafeArea(.all)
+
+struct CustomBackButton: View {
+    let action: () -> Void
+    var body: some View {
+        Button(action: action, label: {
+            Image(systemName: "chevron.backward")
+                .padding(.all, 12)
+                .background(Color.white).foregroundColor(.black)
+                .cornerRadius(8)
+        })
+    }
+}
