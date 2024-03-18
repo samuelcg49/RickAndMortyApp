@@ -43,6 +43,15 @@ struct DetalleView: View {
                                 }
                                 
                             }.padding(20)
+                            Text("Episodios").font(.title)
+                            ScrollView(.horizontal){
+                                HStack(spacing: 20) {
+                                    ForEach(0..<personaje.episode.count) { index in
+                                        CardEpisodioView(indiceEpisodio: personaje.episode[index])
+                                        
+                                    }
+                                }
+                            }.padding(20)
                          
                         }.padding()
                             .padding(.top)
@@ -55,6 +64,8 @@ struct DetalleView: View {
                     .navigationBarItems(leading: CustomBackButton(action: {presentationMode.wrappedValue.dismiss()}) )
             }
     }
+    
+    
 }
 
 #Preview {

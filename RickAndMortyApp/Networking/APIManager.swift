@@ -51,4 +51,35 @@ class APIManager{
             
         }.resume()
     }
+    
+    func obtenerEpisodios(url: String, completion: @escaping (Result<Episodio, NetworkError>) -> Void) {
+        
+        guard let url = URL(string: url) else {
+            completion(.failure(.invalidURL))
+            return
+        }
+        
+        URLSession.shared.dataTask(with: url){ datos, respuesta, error in
+            
+            if let error = error {
+                completion(.failure(.requestFailed(error.localizedDescription as! Error)))
+                return
+            }
+            
+            guard let data = datos else {
+                completion(.failure(.invalidData))
+                return
+            }
+           
+            do{
+                let datosDecodificados = try JSONDecoder().decode(Episodio.self, from: data)
+                completion(.success(datosDecodificados))
+                
+            }catch{
+                completion(.failure(.invalidResponse))
+                return
+            }
+            
+        }.resume()
+    }
 }
