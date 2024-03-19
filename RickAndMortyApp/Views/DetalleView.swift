@@ -47,7 +47,7 @@ struct DetalleView: View {
                             ScrollView(.horizontal){
                                 HStack(spacing: 20) {
                                     ForEach(0..<personaje.episode.count) { index in
-                                        CardEpisodioView(indiceEpisodio: personaje.episode[index])
+                                        CardEpisodioView(urlEpisodio: personaje.episode[index])
                                         
                                     }
                                 }

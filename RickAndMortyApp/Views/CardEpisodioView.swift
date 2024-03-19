@@ -12,9 +12,9 @@ struct CardEpisodioView: View {
     @StateObject var viewModel: EpisodioViewModel
     @State var indiceEpisodio: String
     
-    init(indiceEpisodio: String) {
-        self._viewModel = StateObject(wrappedValue: EpisodioViewModel(url: indiceEpisodio))
-        self._indiceEpisodio = State(initialValue: indiceEpisodio)
+    init(urlEpisodio: String) {
+        self._viewModel = StateObject(wrappedValue: EpisodioViewModel(url: urlEpisodio))
+        self._indiceEpisodio = State(initialValue: urlEpisodio)
     }
     
     
@@ -34,7 +34,7 @@ struct CardEpisodioView: View {
 
 
 #Preview {
-    CardEpisodioView(indiceEpisodio: "https://rickandmortyapi.com/api/episode/1")
+    CardEpisodioView(urlEpisodio: "https://rickandmortyapi.com/api/episode/1")
 }
 
 //Rectangle().frame(width: 250, height: 150).cornerRadius(10).foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/).overlay(Text(indiceEpisodio))
