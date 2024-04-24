@@ -7,16 +7,6 @@
 
 import Foundation
 
-struct RespuestaApiPersonajes: Codable {
-    let info: Info
-    let results: [Character]
-}
-
-struct RespuestaApiEpisodios: Codable {
-    let info: Info
-    let results: [Episodio]
-}
-
 struct Info: Codable {
     let count: Int
     let pages: Int

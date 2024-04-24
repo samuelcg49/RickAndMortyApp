@@ -7,7 +7,7 @@
 
 import Foundation
 
-class EpisodioViewModel: ObservableObject{
+class DatosEpisodioViewModel: ObservableObject{
     
     @Published var infoEpisodio: Episodio
     

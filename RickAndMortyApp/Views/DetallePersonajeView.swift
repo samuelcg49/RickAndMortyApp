@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct DetalleView: View {
+struct DetallePersonajeView: View {
     let personaje: Character
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
@@ -69,7 +69,7 @@ struct DetalleView: View {
 }
 
 #Preview {
-    DetalleView(personaje: PersonajeMock.personaje)
+    DetallePersonajeView(personaje: PersonajeMock.personaje)
 }
 
 

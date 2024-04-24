@@ -7,6 +7,11 @@
 
 import Foundation
 
+struct RespuestaApiEpisodios: Codable {
+    let info: Info
+    let results: [Episodio]
+}
+
 struct Episodio: Codable {
     let id: Int
     let name: String

@@ -15,15 +15,28 @@ struct EpisodiosView: View {
     var body: some View {
         NavigationView {
             List(viewModel.listaDeEpisodios, id: \.id){ episodio in
-                Text(episodio.name)
-                    .onAppear {
-                        if self.viewModel.isLastEpisodio(episodio) {
-                            print("último episodio")
-                            viewModel.getMoreEpisodios(nextPage: currentPage + 1)
-                            currentPage += 1
-                            print("pagina actual \(currentPage)")
-                        }
+                VStack(alignment: .leading){
+                    Text(episodio.name)
+                        .font(.title2)
+                        .fontWeight(.bold)
+                        .padding(.bottom, 10)
+                        
+                    HStack{
+                        Text("Episodio: \(episodio.episode)")
+                        Spacer()
+                        Text(episodio.air_date)
                     }
+                    
+                }
+                .onAppear {
+                    if self.viewModel.isLastEpisodio(episodio) {
+                        print("último episodio")
+                        viewModel.getMoreEpisodios(nextPage: currentPage + 1)
+                        currentPage += 1
+                        print("pagina actual \(currentPage)")
+                    }
+                }
+                
             }.navigationTitle("Episodios")
         }
     }

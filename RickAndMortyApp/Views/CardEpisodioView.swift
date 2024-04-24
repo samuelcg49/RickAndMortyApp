@@ -9,11 +9,11 @@ import SwiftUI
 
 struct CardEpisodioView: View {
     
-    @StateObject var viewModel: EpisodioViewModel
+    @StateObject var viewModel: DatosEpisodioViewModel
     @State var indiceEpisodio: String
     
     init(urlEpisodio: String) {
-        self._viewModel = StateObject(wrappedValue: EpisodioViewModel(url: urlEpisodio))
+        self._viewModel = StateObject(wrappedValue: DatosEpisodioViewModel(url: urlEpisodio))
         self._indiceEpisodio = State(initialValue: urlEpisodio)
     }
     
