@@ -17,13 +17,14 @@ enum NetworkError: Error {
 
 class APIManager{
     
-    private let baseURL = "https://rickandmortyapi.com/api/character"
+    private let baseURL = "https://rickandmortyapi.com/api/character?page="
+    private let episodiosURL = "https://rickandmortyapi.com/api/episode?page="
     static let shared = APIManager()
     
     
-    func obtenerPersonajes(completion: @escaping (Result<[Character], NetworkError>) -> Void) {
+    func obtenerPersonajes(pagina: Int, completion: @escaping (Result<[Character], NetworkError>) -> Void) {
         
-        guard let url = URL(string: baseURL) else {
+        guard let url = URL(string: "\(baseURL)\(pagina)") else {
             completion(.failure(.invalidURL))
             return
         }
@@ -41,7 +42,7 @@ class APIManager{
             }
            
             do{
-                let datosDecodificados = try JSONDecoder().decode(RespuestaAPI.self, from: data)
+                let datosDecodificados = try JSONDecoder().decode(RespuestaApiPersonajes.self, from: data)
                 completion(.success(datosDecodificados.results))
                 
             }catch{
@@ -52,7 +53,7 @@ class APIManager{
         }.resume()
     }
     
-    func obtenerEpisodios(url: String, completion: @escaping (Result<Episodio, NetworkError>) -> Void) {
+    func obtenerDatosEpisodio(url: String, completion: @escaping (Result<Episodio, NetworkError>) -> Void) {
         
         guard let url = URL(string: url) else {
             completion(.failure(.invalidURL))
@@ -82,4 +83,37 @@ class APIManager{
             
         }.resume()
     }
+    
+    func obtenerEpisodios(pagina: Int, completion: @escaping (Result<[Episodio], NetworkError>) -> Void) {
+        
+        guard let url = URL(string: "\(episodiosURL)\(pagina)") else {
+            completion(.failure(.invalidURL))
+            return
+        }
+        
+        URLSession.shared.dataTask(with: url){ datos, respuesta, error in
+            
+            if let error = error {
+                completion(.failure(.requestFailed(error.localizedDescription as! Error)))
+                return
+            }
+            
+            guard let data = datos else {
+                completion(.failure(.invalidData))
+                return
+            }
+           
+            do{
+                let datosDecodificados = try JSONDecoder().decode(RespuestaApiEpisodios.self, from: data)
+                completion(.success(datosDecodificados.results))
+                
+            }catch{
+                completion(.failure(.invalidResponse))
+                return
+            }
+            
+        }.resume()
+    }
+    
+    
 }

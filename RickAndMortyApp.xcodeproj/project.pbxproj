@@ -23,6 +23,7 @@
 		7EDDA9192BA84F3E00276AAA /* EpisodioModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EDDA9182BA84F3E00276AAA /* EpisodioModel.swift */; };
 		7EDDA91B2BA850DB00276AAA /* CardEpisodioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EDDA91A2BA850DB00276AAA /* CardEpisodioView.swift */; };
 		7EDDA91F2BA8698600276AAA /* EpisodioViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EDDA91E2BA8698600276AAA /* EpisodioViewModel.swift */; };
+		7EE816AE2BD923C300AF835A /* EpisodiosViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE816AD2BD923C300AF835A /* EpisodiosViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,7 @@
 		7EDDA9182BA84F3E00276AAA /* EpisodioModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodioModel.swift; sourceTree = "<group>"; };
 		7EDDA91A2BA850DB00276AAA /* CardEpisodioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardEpisodioView.swift; sourceTree = "<group>"; };
 		7EDDA91E2BA8698600276AAA /* EpisodioViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodioViewModel.swift; sourceTree = "<group>"; };
+		7EE816AD2BD923C300AF835A /* EpisodiosViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodiosViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +133,7 @@
 			children = (
 				7E9F300F2BA4D51200F2FA66 /* CharactersViewModel.swift */,
 				7EDDA91E2BA8698600276AAA /* EpisodioViewModel.swift */,
+				7EE816AD2BD923C300AF835A /* EpisodiosViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -220,6 +223,7 @@
 				7E2125FC2BA355910017C177 /* PersonajesView.swift in Sources */,
 				7E21260F2BA361B70017C177 /* CharacterModel.swift in Sources */,
 				7E21260A2BA360CD0017C177 /* APIManager.swift in Sources */,
+				7EE816AE2BD923C300AF835A /* EpisodiosViewModel.swift in Sources */,
 				7EDDA9192BA84F3E00276AAA /* EpisodioModel.swift in Sources */,
 				7E9F300E2BA4CEAB00F2FA66 /* ResponseModel.swift in Sources */,
 				7E9F30152BA5BA6100F2FA66 /* MockData.swift in Sources */,

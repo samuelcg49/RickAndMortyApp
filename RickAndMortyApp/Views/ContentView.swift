@@ -10,26 +10,27 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         TabView {
-                    // Contenido de la primera pestaña
-                    PersonajesView()
-                        .tabItem {
-                            Image(systemName: "person")
-                            Text("Personajes")
-                        }
-                    
-                    // Contenido de la segunda pestaña
-                    EpisodiosView()
-                        .tabItem {
-                            Image(systemName: "tv")
-                            Text("Episodios")
-                        }
+            // Vista de personajes
+            PersonajesView()
+                .tabItem {
+                    Image(systemName: "person")
+                    Text("Personajes")
+                }
             
+            // Vista de episodios
+            EpisodiosView()
+                .tabItem {
+                    Image(systemName: "tv")
+                    Text("Episodios")
+                }
+            
+            // Vista de ubicaciones
             UbicacionesView().tabItem{
                 Image(systemName: "globe")
                 Text("Ubicaciones")
             }
-                }
-                .accentColor(.blue)
+        }
+        .accentColor(.blue)
     }
 }
 
