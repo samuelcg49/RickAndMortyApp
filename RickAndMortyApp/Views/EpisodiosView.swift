@@ -9,7 +9,7 @@ import SwiftUI
 
 struct EpisodiosView: View {
     
-    @StateObject var viewModel = EpisodiosViewModel()
+    @StateObject var viewModel = EpisodioViewModel(url: "")
     @State var currentPage = 1
     
     var body: some View {
