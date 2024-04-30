@@ -44,7 +44,9 @@ struct PersonajesView: View {
                     }
                 }
                 
-            }.navigationTitle("Personajes")
+            }.background(.white)
+            .scrollContentBackground(.hidden)
+            .navigationTitle("Personajes")
         }
     }
 }
