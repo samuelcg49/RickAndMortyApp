@@ -8,20 +8,27 @@
 import SwiftUI
 
 struct DetalleEpisodioView: View {
-     var episodio: Episodio
+    var episodio: Episodio
+    @StateObject var viewModel = CharactersViewModel()
     
     var body: some View {
         VStack {
             Text(episodio.name)
                 .font(.title)
-            .fontWeight(.bold)
-            .padding(.bottom, 30)
+                .fontWeight(.bold)
+                .padding(.bottom, 30)
             Text("Fecha de emisión: \(episodio.air_date)")
-            
-            // Incluir lista de personajes del capítulo
-            
         }
-
+        .padding(.bottom, 50)
+        ScrollView {
+            LazyVGrid(columns: [GridItem(.flexible(minimum: 100)), GridItem(.flexible(minimum: 100))]) {
+                ForEach(viewModel.listaDePersonajes, id: \.id) { personaje in
+                    CardPersonajeView(personaje: personaje)
+                }
+                
+            }
+        }
+        
     }
 }
 

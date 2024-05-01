@@ -37,7 +37,7 @@ struct PersonajesView: View {
                     }.onAppear {
                         if self.viewModel.isLastPersonaje(personaje) {
                             print("último personaje")
-                            viewModel.getMorePersonajes(nextPage: currentPage + 1)
+                            viewModel.getMorePersonajes(nextPage: currentPage + 1, numeroPersonaje: nil)
                             currentPage += 1
                             print("pagina actual \(currentPage)")
                         }

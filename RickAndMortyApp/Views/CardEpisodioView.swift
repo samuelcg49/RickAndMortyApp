@@ -42,5 +42,3 @@ struct CardEpisodioView: View {
 #Preview {
     CardEpisodioView(urlEpisodio: "https://rickandmortyapi.com/api/episode/1")
 }
-
-//Rectangle().frame(width: 250, height: 150).cornerRadius(10).foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/).overlay(Text(indiceEpisodio))

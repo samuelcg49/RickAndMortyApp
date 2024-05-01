@@ -9,7 +9,8 @@ import Foundation
 
 class CharactersViewModel: ObservableObject{
     
-    @Published var listaDePersonajes = [Character]()    
+    @Published var listaDePersonajes = [Character]()
+    
     
     init() {
         getListaDePersonajes()
@@ -35,9 +36,9 @@ class CharactersViewModel: ObservableObject{
             return personaje.id == lastPersonaje.id
     }
     
-    func getMorePersonajes(nextPage: Int){   
+    func getMorePersonajes(nextPage: Int, numeroPersonaje: Int?){   
         print("GetMorePersonajes ejecutado")
-        APIManager.shared.obtenerPersonajes(pagina: nextPage ){ resultado in
+        APIManager.shared.obtenerPersonajes(pagina: nextPage){ resultado in
             DispatchQueue.main.async{
                 switch resultado{
                     case .success(let characters):

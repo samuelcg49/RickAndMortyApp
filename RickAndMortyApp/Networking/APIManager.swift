@@ -17,15 +17,16 @@ enum NetworkError: Error {
 
 class APIManager{
     
-    private let baseURL = "https://rickandmortyapi.com/api/character?page="
+    private let baseURL = "https://rickandmortyapi.com/api/character/"
     private let episodiosURL = "https://rickandmortyapi.com/api/episode?page="
     private let locationURL = "https://rickandmortyapi.com/api/location?page="
+    
     static let shared = APIManager()
     
     
     func obtenerPersonajes(pagina: Int, completion: @escaping (Result<[Character], NetworkError>) -> Void) {
         
-        guard let url = URL(string: "\(baseURL)\(pagina)") else {
+        guard let url = URL(string: "\(baseURL)?page=\(pagina)") else {
             completion(.failure(.invalidURL))
             return
         }
