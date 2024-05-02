@@ -9,7 +9,8 @@ import SwiftUI
 
 struct DetalleEpisodioView: View {
     var episodio: Episodio
-    @StateObject var viewModel = CharactersViewModel()
+    @StateObject var viewModel = CharactersViewModel(urlPersonaje: "")
+    @State var urlPersonaje = ""
     
     var body: some View {
         VStack {
@@ -22,8 +23,8 @@ struct DetalleEpisodioView: View {
         .padding(.bottom, 50)
         ScrollView {
             LazyVGrid(columns: [GridItem(.flexible(minimum: 100)), GridItem(.flexible(minimum: 100))]) {
-                ForEach(viewModel.listaDePersonajes, id: \.id) { personaje in
-                    CardPersonajeView(personaje: personaje)
+                ForEach(0..<episodio.characters.count) { index in
+                    CardPersonajeView(urlPersonaje: episodio.characters[index])
                 }
                 
             }

@@ -10,9 +10,15 @@ import Foundation
 class CharactersViewModel: ObservableObject{
     
     @Published var listaDePersonajes = [Character]()
+    @Published var personaje: Character
     
-    
-    init() {
+    init(urlPersonaje: String?) {
+        self.personaje = Character(id: 1, name: "", status: "", species: "", type: "", gender: "", origin: Origin(name: "", url:""), location: Location(name: "", url:""), image: "", episode: [], url: "", created: "")
+        
+        if let urlPersonaje = urlPersonaje {
+            getPersonaje(urlPersonaje: urlPersonaje)
+        }
+        
         getListaDePersonajes()
     }
     
@@ -25,6 +31,19 @@ class CharactersViewModel: ObservableObject{
                     case .failure(let error):
                         print("Error al obtener personajes: \(error)")
                     }
+            }
+        }
+    }
+    
+    func getPersonaje(urlPersonaje: String){
+        APIManager.shared.obtenerDatosPersonaje(urlPersonaje: urlPersonaje){ resultado in
+            DispatchQueue.main.async{
+                switch resultado {
+                case .success(let character):
+                    self.personaje = character
+                case.failure(let error):
+                    print("Error al obtener el personaje: \(error)")
+                }
             }
         }
     }

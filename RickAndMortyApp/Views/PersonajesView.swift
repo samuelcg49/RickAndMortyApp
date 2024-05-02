@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PersonajesView: View {
     
-    @StateObject var viewModel = CharactersViewModel()
+    @StateObject var viewModel = CharactersViewModel(urlPersonaje: "")
     @State var currentPage = 1
     
     var body: some View {

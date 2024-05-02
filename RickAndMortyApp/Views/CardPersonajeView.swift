@@ -8,17 +8,23 @@
 import SwiftUI
 
 struct CardPersonajeView: View {
-    @State var personaje: Character
+    @StateObject var viewModel: CharactersViewModel
+    @State var indicePersonaje: String
+    
+    init(urlPersonaje: String) {
+        self._viewModel = StateObject(wrappedValue: CharactersViewModel(urlPersonaje: urlPersonaje))
+        self._indicePersonaje = State(initialValue: urlPersonaje)
+    }
     
     var body: some View {
       
         VStack {
-            AsyncImage(url: URL(string: personaje.image)){ image in
+            AsyncImage(url: URL(string: viewModel.personaje.image)){ image in
                 image.resizable().frame(maxWidth: 130, maxHeight: 130)
             } placeholder: {
                 ProgressView()
             }.padding(.bottom, 15)
-            Text(personaje.name)
+            Text(viewModel.personaje.name)
             
         }.padding().border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/).background(Color.gray.opacity(0.30))
         
@@ -26,5 +32,5 @@ struct CardPersonajeView: View {
 }
 
 #Preview {
-    CardPersonajeView(personaje: PersonajeMock.personaje)
+    CardPersonajeView(urlPersonaje: "https://rickandmortyapi.com/api/character/1")
 }
