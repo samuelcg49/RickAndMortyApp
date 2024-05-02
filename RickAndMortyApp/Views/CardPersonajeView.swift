@@ -25,6 +25,7 @@ struct CardPersonajeView: View {
                 ProgressView()
             }.padding(.bottom, 15)
             Text(viewModel.personaje.name)
+                .foregroundColor(.black)
             
         }.padding().border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/).background(Color.gray.opacity(0.30))
         

@@ -9,11 +9,11 @@ import Foundation
 
 class EpisodioViewModel: ObservableObject{
     
-    @Published var infoEpisodio: Episodio
+    @Published var episodio: Episodio
     @Published var listaDeEpisodios = [Episodio]()
     
     init(url: String?) {
-        self.infoEpisodio = Episodio(id: 0, name: "", air_date: "", episode: "", characters: [], url: "", created: "")
+        self.episodio = Episodio(id: 0, name: "", air_date: "", episode: "", characters: [], url: "", created: "")
         
         getDatosEpisodio(url: url!)
         
@@ -26,7 +26,7 @@ class EpisodioViewModel: ObservableObject{
             DispatchQueue.main.async{
                 switch resultado{
                 case .success(let episodio):
-                    self?.infoEpisodio = episodio
+                    self?.episodio = episodio
                 case .failure(let error):
                     print("Error al obtener datos del episodio: \(error)")
                 }

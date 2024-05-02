@@ -8,23 +8,33 @@
 import SwiftUI
 
 struct DetalleEpisodioView: View {
-    var episodio: Episodio
-    @StateObject var viewModel = CharactersViewModel(urlPersonaje: "")
+    
     @State var urlPersonaje = ""
+    @StateObject var viewModel: EpisodioViewModel
+    @State var indiceEpisodio: String
+    
+    init(urlEpisodio: String) {
+        self._viewModel = StateObject(wrappedValue: EpisodioViewModel(url: urlEpisodio))
+        self._indiceEpisodio = State(initialValue: urlEpisodio)
+    }
+    
     
     var body: some View {
         VStack {
-            Text(episodio.name)
+            Text(viewModel.episodio.name)
                 .font(.title)
                 .fontWeight(.bold)
                 .padding(.bottom, 30)
-            Text("Fecha de emisión: \(episodio.air_date)")
+            Text("Fecha de emisión: \(viewModel.episodio.air_date)")
         }
         .padding(.bottom, 50)
         ScrollView {
             LazyVGrid(columns: [GridItem(.flexible(minimum: 100)), GridItem(.flexible(minimum: 100))]) {
-                ForEach(0..<episodio.characters.count) { index in
-                    CardPersonajeView(urlPersonaje: episodio.characters[index])
+                ForEach(0..<viewModel.episodio.characters.count, id: \.self) { index in
+                    NavigationLink(destination: DetallePersonajeView(urlPersonaje: viewModel.episodio.characters[index])){
+                        CardPersonajeView(urlPersonaje: viewModel.episodio.characters[index])
+                    }
+                    
                 }
                 
             }
@@ -35,5 +45,5 @@ struct DetalleEpisodioView: View {
 
 
 #Preview {
-    DetalleEpisodioView(episodio: EpisodioMock.episodio)
+    DetalleEpisodioView(urlEpisodio: "https://rickandmortyapi.com/api/episode/1")
 }

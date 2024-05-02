@@ -76,7 +76,7 @@ class APIManager{
             do{
                 let datosDecodificados = try JSONDecoder().decode(Character.self, from: data)
                 completion(.success(datosDecodificados))
-                
+                print(datosDecodificados)
             }catch{
                 completion(.failure(.invalidResponse))
                 return

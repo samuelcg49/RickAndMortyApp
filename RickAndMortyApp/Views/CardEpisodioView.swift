@@ -21,12 +21,14 @@ struct CardEpisodioView: View {
     var body: some View {
         
         VStack(alignment: .leading){
-            Text(viewModel.infoEpisodio.name)
+            Text(viewModel.episodio.name)
                 .foregroundColor(.black)
             Spacer().frame(height: 5)
-            Text(viewModel.infoEpisodio.episode)
+            Text(viewModel.episodio.episode)
+                .foregroundColor(.black)
             Spacer().frame(height: 5)
-            Text(viewModel.infoEpisodio.air_date)
+            Text(viewModel.episodio.air_date)
+                .foregroundColor(.black)
         }.padding().overlay(
             RoundedRectangle(cornerRadius: 10) // Redondea las esquinas de la superposición
                 .stroke(Color.blue, lineWidth: 3) // Agrega un borde azul

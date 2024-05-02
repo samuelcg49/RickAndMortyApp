@@ -15,7 +15,7 @@ struct PersonajesView: View {
     var body: some View {
         NavigationView {
             List(viewModel.listaDePersonajes, id: \.id){ personaje in
-                NavigationLink(destination: DetallePersonajeView(personaje: personaje)){
+                NavigationLink(destination: DetallePersonajeView(urlPersonaje: personaje.url)){
                     HStack{
                         AsyncImage(url: URL(string: personaje.image)){ image in
                             image.resizable().aspectRatio(contentMode: .fill)

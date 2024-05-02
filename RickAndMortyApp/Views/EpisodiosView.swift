@@ -15,7 +15,7 @@ struct EpisodiosView: View {
     var body: some View {
         NavigationView {
             List(viewModel.listaDeEpisodios, id: \.id){ episodio in
-                NavigationLink(destination: DetalleEpisodioView(episodio: episodio)) {
+                NavigationLink(destination: DetalleEpisodioView(urlEpisodio: episodio.url)) {
                     VStack(alignment: .leading){
                         Text(episodio.name)
                             .font(.title2)

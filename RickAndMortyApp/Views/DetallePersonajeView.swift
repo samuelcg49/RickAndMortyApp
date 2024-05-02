@@ -8,9 +8,15 @@
 import SwiftUI
 
 struct DetallePersonajeView: View {
-    let personaje: Character
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @StateObject var viewModel: CharactersViewModel
+    @State var indicePersonaje: String
+    
+    init(urlPersonaje: String) {
+        self._viewModel = StateObject(wrappedValue: CharactersViewModel(urlPersonaje: urlPersonaje))
+        self._indicePersonaje = State(initialValue: urlPersonaje)
+    }
     
     var body: some View {
         
@@ -18,38 +24,42 @@ struct DetallePersonajeView: View {
             
             ScrollView{
                 
-                AsyncImage(url: URL(string: personaje.image)){ image in
+                AsyncImage(url: URL(string: viewModel.personaje.image)){ image in
                     image.resizable().aspectRatio(contentMode: .fit)
                 } placeholder: {
                     ProgressView()
                 }
                 
                 VStack{
-                    Text(personaje.name).font(.title).fontWeight(.bold)
-                    if personaje.status == "Alive"{
-                        Text(personaje.status).foregroundColor(.green)
-                    }else if personaje.status == "Dead"{
-                        Text(personaje.status).foregroundColor(.red)
+                    Text(viewModel.personaje.name).font(.title).fontWeight(.bold)
+                    if viewModel.personaje.status == "Alive"{
+                        Text(viewModel.personaje.status).foregroundColor(.green)
+                    }else if viewModel.personaje.status == "Dead"{
+                        Text(viewModel.personaje.status).foregroundColor(.red)
                     }else{
-                        Text(personaje.status).foregroundColor(.gray)
+                        Text(viewModel.personaje.status).foregroundColor(.gray)
                     }
                     HStack{
                         VStack(alignment: .leading){
-                            Text("Género: \(personaje.gender)")
+                            Text("Género: \(viewModel.personaje.gender)")
                         }.padding(.bottom)
                         Spacer()
                         VStack(alignment: .leading){
-                            Text("Raza: \(personaje.species)")
-                            Text("Status: \(personaje.status)")
+                            Text("Raza: \(viewModel.personaje.species)")
+                            Text("Status: \(viewModel.personaje.status)")
                         }
                         
                     }.padding(20)
                     Text("Episodios").font(.title)
                     ScrollView(.horizontal){
                         HStack(spacing: 20) {
-                            ForEach(0..<personaje.episode.count) { index in
-                                CardEpisodioView(urlEpisodio: personaje.episode[index])
+                            ForEach(0..<viewModel.personaje.episode.count, id: \.self) { index in
+                                NavigationLink(destination: DetalleEpisodioView(urlEpisodio: viewModel.personaje.episode[index])){
+                                    CardEpisodioView(urlEpisodio: viewModel.personaje.episode[index])
+                                }
+                                
                             }
+                            
                         }
                     }.padding(20)
                     
@@ -69,7 +79,7 @@ struct DetallePersonajeView: View {
 }
 
 #Preview {
-    DetallePersonajeView(personaje: PersonajeMock.personaje)
+    DetallePersonajeView(urlPersonaje: "https://rickandmortyapi.com/api/character/1")
 }
 
 
