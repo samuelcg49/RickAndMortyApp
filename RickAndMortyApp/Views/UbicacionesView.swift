@@ -14,30 +14,33 @@ struct UbicacionesView: View {
     var body: some View {
         NavigationView {
             List(viewModel.listaDeUbicaciones, id: \.id){ location in
-                VStack(alignment: .leading){
-                    Text(location.name)
-                        .font(.title2)
-                        .fontWeight(.bold)
-                        .padding(.bottom, 10)
-                        
-                    HStack{
-                        Text("Tipo: \(location.type)")
-                        Spacer()
-                        if location.dimension != "unknown" {
-                            Text(location.dimension)
+                NavigationLink(destination: DetalleUbicacionesView(location: location)){
+                    VStack(alignment: .leading){
+                        Text(location.name)
+                            .font(.title2)
+                            .fontWeight(.bold)
+                            .padding(.bottom, 10)
+                            
+                        HStack{
+                            Text("Tipo: \(location.type)")
+                            Spacer()
+                            if location.dimension != "unknown" {
+                                Text(location.dimension)
+                            }
+                            
                         }
                         
                     }
-                    
-                }
-                .onAppear {
-                    if self.viewModel.isLastLocation(location) {
-                        print("último episodio")
-                        viewModel.getMorelocations(nextPage: currentPage + 1)
-                        currentPage += 1
-                        print("pagina actual \(currentPage)")
+                    .onAppear {
+                        if self.viewModel.isLastLocation(location) {
+                            print("último episodio")
+                            viewModel.getMorelocations(nextPage: currentPage + 1)
+                            currentPage += 1
+                            print("pagina actual \(currentPage)")
+                        }
                     }
                 }
+                
                 
             }.navigationTitle("Ubicaciones")
         }
